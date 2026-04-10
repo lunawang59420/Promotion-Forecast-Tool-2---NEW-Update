@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Primo Brands — Promotion Forecast Tool 2</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f4f6f9; min-height: 100vh; padding: 2rem 1rem; color: #1a1a2e; }
+  .wrap { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 600; color: #1a1a2e; margin-bottom: 4px; }
+  .subtitle { font-size: 14px; color: #6b7280; margin-bottom: 1.5rem; }
+  .main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; align-items: start; }
+  @media (max-width: 700px) { .main-grid { grid-template-columns: 1fr; } }
+  .card { background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; padding: 1.25rem; margin-bottom: 1rem; }
+  .card:last-child { margin-bottom: 0; }
+  .sec { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #9ca3af; margin-bottom: 12px; }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .igrp label { font-size: 13px; color: #6b7280; margin-bottom: 4px; display: block; }
+  input[type="text"], select { width: 100%; height: 40px; border: 1px solid #d1d5db; border-radius: 8px; padding: 0 12px; font-size: 14px; color: #1a1a2e; background: #fff; outline: none; font-family: inherit; }
+  input:focus, select:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+  .rv { height: 40px; display: flex; align-items: center; padding: 0 12px; border: 1px solid #e5e7eb; border-radius: 8px; font-size: 14px; font-weight: 600; background: #f0f4ff; color: #1a1a2e; }
+  .bench-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; padding: 4px 10px; border-radius: 8px; background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; margin-top: 5px; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { font-size: 13px; font-weight: 600; color: #6b7280; padding: 8px 10px; text-align: right; border-bottom: 1px solid #e5e7eb; }
+  thead th.rh { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.4px; color: #9ca3af; }
+  tbody td { font-size: 14px; padding: 9px 10px; text-align: right; border-bottom: 1px solid #f3f4f6; color: #1a1a2e; }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody td.rl { text-align: left; font-size: 13px; color: #6b7280; }
+  .out-col { display: flex; flex-direction: column; gap: 10px; }
+  .out-header { background: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 12px; padding: 1rem 1.25rem; }
+  .oh-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #2e7d32; margin-bottom: 4px; }
+  .oh-val { font-size: 24px; font-weight: 700; color: #1b5e20; }
+  .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .mc { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 12px; padding: 1rem 1.25rem; }
+  .mc .ml { font-size: 12px; color: #1565c0; margin-bottom: 4px; }
+  .mc .mv { font-size: 22px; font-weight: 700; color: #0d47a1; }
+  .mc .ms { font-size: 11px; color: #5c85b3; margin-top: 3px; }
+  .sc-title { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; color: #1565c0; margin-bottom: 8px; }
+  .note { font-size: 12px; color: #9ca3af; line-height: 1.6; margin-top: 1rem; padding: 10px 12px; background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Primo Brands — Promotion Forecast Tool 2</h1>
+  <p class="subtitle">Select mechanic and budget — forecast outputs appear on the right</p>
+
+  <div class="main-grid">
+
+    <div>
+      <div class="card">
+        <div class="sec">Inputs</div>
+        <div class="g2">
+          <div class="igrp">
+            <label>Mechanic type</label>
+            <select id="mech">
+              <option value="SWEEPSTAKES">Sweepstakes</option>
+              <option value="RECEIPT">Receipt</option>
+              <option value="INSTANT WIN">Instant Win</option>
+              <option value="UCG SWEEPS & CONTEST" selected>UGC Sweeps &amp; Contest</option>
+              <option value="QUICK CLICK PROMOTION">Quick Click Promotion</option>
+              <option value="SOCIAL HASHTAG">Social Hashtag</option>
+              <option value="PERSONALITY TEST">Personality Test</option>
+              <option value="TRIVIA/QUIZ">Trivia / Quiz</option>
+              <option value="NOMINATION CONTEST">Nomination Contest</option>
+              <option value="PUNCH CARD">Punch Card</option>
+              <option value="REBATE OR GIFT W/PURCHASE">Rebate or Gift w/ Purchase</option>
+              <option value="COLLECT & WIN">Collect &amp; Win</option>
+              <option value="AR EXPERIENCE">AR Experience</option>
+              <option value="ENGAGEMENT HUB">Engagement Hub</option>
+            </select>
+            <div class="bench-pill">Benchmark: <strong id="benchLabel">Hybrid</strong></div>
+          </div>
+          <div class="igrp">
+            <label>Duration (days)</label>
+            <input type="text" id="dur" value="60" />
+          </div>
+          <div class="igrp">
+            <label>Build &amp; prize ($)</label>
+            <input type="text" id="build" value="72,000" />
+          </div>
+          <div class="igrp">
+            <label>Media cost ($)</label>
+            <input type="text" id="media" value="10,000" />
+          </div>
+        </div>
+        <div class="igrp">
+          <label>Total all-in cost</label>
+          <div class="rv" id="totalDisp">$82,000</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="sec">Benchmark averages</div>
+        <table>
+          <thead><tr><th class="rh">Metric</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td class="rl">Avg entries / day</td><td id="bEntDay">—</td></tr>
+            <tr><td class="rl">Avg new members / day</td><td id="bMemDay">—</td></tr>
+            <tr><td class="rl">Avg acquisition rate</td><td id="bAcq">—</td></tr>
+            <tr><td class="rl">Avg CPE (reference)</td><td id="bCPE">—</td></tr>
+            <tr><td class="rl">Avg CPA (reference)</td><td id="bCPA">—</td></tr>
+          </tbody>
+        </table>
+        <div class="note">Sweepstakes and Receipt show base forecast (avg/day × duration). All other mechanics use Hybrid benchmarks and show Low / High range.</div>
+      </div>
+    </div>
+
+    <div class="out-col">
+      <div class="out-header">
+        <div class="oh-label">Selected mechanic</div>
+        <div class="oh-val" id="mechLabel">UGC SWEEPS &amp; CONTEST</div>
+      </div>
+
+      <!-- BASE: Sweepstakes / Receipt -->
+      <div id="baseSection">
+        <div class="metric-grid" style="margin-bottom:10px;">
+          <div class="mc">
+            <div class="ml">Forecast entries</div>
+            <div class="mv" id="baseEnt">—</div>
+          </div>
+          <div class="mc">
+            <div class="ml">Forecast new members</div>
+            <div class="mv" id="baseMem">—</div>
+          </div>
+          <div class="mc">
+            <div class="ml">New members / day</div>
+            <div class="mv" id="baseMpD">—</div>
+          </div>
+        </div>
+        <div class="mc" style="margin-bottom:10px;">
+          <div class="ml">CPE — all-in</div>
+          <div class="mv" id="baseCPE">—</div>
+          <div class="ms">build + prize + media</div>
+        </div>
+        <div class="mc">
+          <div class="ml">CPA — all-in</div>
+          <div class="mv" id="baseCPA">—</div>
+          <div class="ms">build + prize + media</div>
+        </div>
+      </div>
+
+      <!-- RANGE: All other mechanics -->
+      <div id="rangeSection" style="display:none;">
+        <div style="margin-bottom:10px;">
+          <div class="sc-title">Low (conservative)</div>
+          <div class="metric-grid">
+            <div class="mc">
+              <div class="ml">CPE</div>
+              <div class="mv" id="lowCPE">—</div>
+            </div>
+            <div class="mc">
+              <div class="ml">CPA</div>
+              <div class="mv" id="lowCPA">—</div>
+            </div>
+            <div class="mc">
+              <div class="ml">Forecast entries</div>
+              <div class="mv" id="lowEnt">—</div>
+            </div>
+            <div class="mc">
+              <div class="ml">Forecast members</div>
+              <div class="mv" id="lowMem">—</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="sc-title">High (optimistic)</div>
+          <div class="metric-grid">
+            <div class="mc">
+              <div class="ml">CPE</div>
+              <div class="mv" id="highCPE">—</div>
+            </div>
+            <div class="mc">
+              <div class="ml">CPA</div>
+              <div class="mv" id="highCPA">—</div>
+            </div>
+            <div class="mc">
+              <div class="ml">Forecast entries</div>
+              <div class="mv" id="highEnt">—</div>
+            </div>
+            <div class="mc">
+              <div class="ml">Forecast members</div>
+              <div class="mv" id="highMem">—</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+const BENCHMARKS={
+  SWEEPSTAKES:{entDay:488.34,memDay:20.55,acq:0.23384,cpe:80.09,cpa:360.49},
+  RECEIPT:    {entDay:453.06,memDay:85.02,acq:0.27987,cpe:2.9455,cpa:36.415},
+  HYBRID:     {entDay:10225.5,memDay:126.36,acq:0.20511,cpe:7.1046,cpa:27.075}
+};
+const LOW_CPE=0.01266,LOW_CPA=4.066,HIGH_CPE=14.949,HIGH_CPA=58.63;
+function parseNum(s){return parseFloat(String(s).replace(/,/g,''))||0;}
+function fmt(n){return Math.round(n).toLocaleString('en-US');}
+function fmtC(n){return'$'+n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function fmtInput(s){const r=s.replace(/,/g,'').replace(/[^0-9]/g,'');return r?parseInt(r,10).toLocaleString('en-US'):'';}
+function calc(){
+  const mech=document.getElementById('mech').value;
+  const dur=parseNum(document.getElementById('dur').value)||1;
+  const build=parseNum(document.getElementById('build').value);
+  const media=parseNum(document.getElementById('media').value);
+  const total=build+media;
+  const isBase=(mech==='SWEEPSTAKES'||mech==='RECEIPT');
+  const b=BENCHMARKS[isBase?mech:'HYBRID'];
+  document.getElementById('totalDisp').textContent='$'+fmt(total);
+  document.getElementById('mechLabel').textContent=mech;
+  document.getElementById('benchLabel').textContent=mech==='SWEEPSTAKES'?'Sweepstakes':mech==='RECEIPT'?'Receipt':'Hybrid';
+  document.getElementById('bEntDay').textContent=b.entDay.toFixed(1);
+  document.getElementById('bMemDay').textContent=b.memDay.toFixed(1);
+  document.getElementById('bAcq').textContent=(b.acq*100).toFixed(1)+'%';
+  document.getElementById('bCPE').textContent=fmtC(b.cpe);
+  document.getElementById('bCPA').textContent=fmtC(b.cpa);
+  document.getElementById('baseSection').style.display=isBase?'block':'none';
+  document.getElementById('rangeSection').style.display=isBase?'none':'block';
+  if(total>0){
+    if(isBase){
+      const ent=b.entDay*dur,mem=b.memDay*dur;
+      document.getElementById('baseCPE').textContent=fmtC(total/ent);
+      document.getElementById('baseCPA').textContent=fmtC(total/mem);
+      document.getElementById('baseEnt').textContent=fmt(ent);
+      document.getElementById('baseMem').textContent=fmt(mem);
+      document.getElementById('baseMpD').textContent=(mem/dur).toFixed(1);
+    } else {
+      document.getElementById('lowCPE').textContent=fmtC(LOW_CPE);
+      document.getElementById('lowCPA').textContent=fmtC(LOW_CPA);
+      document.getElementById('lowEnt').textContent=fmt(total/LOW_CPE);
+      document.getElementById('lowMem').textContent=fmt(total/LOW_CPA);
+      document.getElementById('highCPE').textContent=fmtC(HIGH_CPE);
+      document.getElementById('highCPA').textContent=fmtC(HIGH_CPA);
+      document.getElementById('highEnt').textContent=fmt(total/HIGH_CPE);
+      document.getElementById('highMem').textContent=fmt(total/HIGH_CPA);
+    }
+  }
+}
+['build','media'].forEach(id=>{
+  document.getElementById(id).addEventListener('input',function(){
+    const pos=this.selectionStart,old=this.value.length;
+    this.value=fmtInput(this.value);
+    const diff=this.value.length-old;
+    this.setSelectionRange(pos+diff,pos+diff);
+    calc();
+  });
+});
+['mech','dur'].forEach(id=>document.getElementById(id).addEventListener('input',calc));
+calc();
+</script>
+</body>
+</html>
